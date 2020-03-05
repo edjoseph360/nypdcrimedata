@@ -34,7 +34,7 @@ function createMap(arrests) {
 function createMarkers(response) {
 
   // Pull the "stations" property off of response.data
-  var crimename = response.data.crimename;
+  var crimename = response;
 
   // Initialize an array to hold bike markers
   var arrestMarkers = [];
