@@ -1,4 +1,4 @@
-function createMap(bikeStations) {
+function createMap(arrests) {
 
   // Create the tile layer that will be the background of our map
   var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token={accessToken}", {
@@ -15,14 +15,14 @@ function createMap(bikeStations) {
 
   // Create an overlayMaps object to hold the bikeStations layer
   var overlayMaps = {
-    "Bike Stations": bikeStations
+    "All Arrests": arrests
   };
 
   // Create the map object with options
   var map = L.map("map-id", {
     center: [40.73, -74.0059],
     zoom: 12,
-    layers: [lightmap, bikeStations]
+    layers: [lightmap, arrests]
   });
 
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
@@ -34,27 +34,27 @@ function createMap(bikeStations) {
 function createMarkers(response) {
 
   // Pull the "stations" property off of response.data
-  var stations = response.data.stations;
+  var crimename = response.data.crimename;
 
   // Initialize an array to hold bike markers
-  var bikeMarkers = [];
+  var arrestMarkers = [];
 
   // Loop through the stations array
-  for (var index = 0; index < stations.length; index++) {
-    var station = stations[index];
+  for (var index = 0; index < crimename.length; index++) {
+    var crime = crimename[index];
 
     // For each station, create a marker and bind a popup with the station's name
-    var bikeMarker = L.marker([station.lat, station.lon])
-      .bindPopup("<h3>" + station.name + "<h3><h3>Capacity: " + station.capacity + "<h3>");
+    var arrestMarker = L.marker([crime.latitude, crime.longitude])
+      .bindPopup("<h3>" + crime.ofns_desc + "<h3><h3>ArrestDate: " + crime.arrest_date + "<h3>");
 
     // Add the marker to the bikeMarkers array
-    bikeMarkers.push(bikeMarker);
+    arrestMarkers.push(arrestMarker);
   }
 
   // Create a layer group made from the bike markers array, pass it into the createMap function
-  createMap(L.layerGroup(bikeMarkers));
+  createMap(L.layerGroup(arrestMarkers));
 }
 
 
 // Perform an API call to the Citi Bike API to get station information. Call createMarkers when complete
-d3.json("https://gbfs.citibikenyc.com/gbfs/en/station_information.json", createMarkers);
+d3.json("https://data.cityofnewyork.us/resource/uip8-fykc.json", createMarkers);
