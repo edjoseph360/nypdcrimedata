@@ -45,7 +45,7 @@ function createMarkers(response) {
 
     // For each station, create a marker and bind a popup with the station's name
     var arrestMarker = L.marker([crime.latitude, crime.longitude])
-      .bindPopup("<h3>" + crime.ofns_desc + "<h3><h3>ArrestDate: " + crime.arrest_date + "<h3>");
+      .bindPopup("<h3>" + crime.ofns_desc + "<h3><h3>Arrest Date: " + crime.arrest_date + "<h3>");
 
     // Add the marker to the bikeMarkers array
     arrestMarkers.push(arrestMarker);
