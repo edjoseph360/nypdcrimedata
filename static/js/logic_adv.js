@@ -25,10 +25,11 @@ var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/til
     "Dark Map": darkmap
   };
 var layers = {
+  ALL_CRIME: new L.LayerGroup(),
   RAPE: new L.LayerGroup(),
   MURDER: new L.LayerGroup(),
   ROBBERY: new L.LayerGroup(),
-  NORMAL: new L.LayerGroup(),
+  OTHER: new L.LayerGroup(),
 };
 
 
@@ -36,10 +37,11 @@ var map = L.map("map-id", {
   center: [40.73, -74.0059],
   zoom: 12,
   layers: [
+    layers.ALL_CRIME,
     layers.RAPE,
     layers.MURDER,
     layers.ROBBERY,
-    layers.NORMAL
+    layers.OTHER
   ]
 });
 
@@ -48,10 +50,11 @@ lightmap.addTo(map);
 
 
 var overlays = {
+  "All Crimes": layers.ALL_CRIME,
   "Rape": layers.RAPE,
   "Murder": layers.MURDER,
   "Robbery": layers.ROBBERY,
-  "Normal": layers.NORMAL
+  "Other": layers.OTHER
 };
 
 
@@ -59,27 +62,33 @@ L.control.layers(baseMaps, overlays).addTo(map);
 
 
 var icons = {
-  RAPE: L.ExtraMarkers.icon({
-    icon: "ion-settings",
-    iconColor: "blue",
+  ALL_CRIME: L.ExtraMarkers.icon({
+    icon: "ion-minus-circled",
+    iconColor: "grey",
     markerColor: "yellow",
-    shape: "star"
+    shape: "circle"
+  }),
+  RAPE: L.ExtraMarkers.icon({
+    icon: "ion-minus-circled",
+    iconColor: "red",
+    markerColor: "red",
+    shape: "circle"
   }),
   MURDER: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
-    iconColor: "green",
-    markerColor: "red",
+    icon: "ion-minus-circled",
+    iconColor: "blue",
+    markerColor: "blue-dark",
     shape: "circle"
   }),
   ROBBERY: L.ExtraMarkers.icon({
     icon: "ion-minus-circled",
     iconColor: "black",
-    markerColor: "blue-dark",
-    shape: "penta"
+    markerColor: "orange",
+    shape: "circle"
   }),
-  NORMAL: L.ExtraMarkers.icon({
-    icon: "ion-android-bicycle",
-    iconColor: "red",
+  OTHER: L.ExtraMarkers.icon({
+    icon: "ion-minus-circled",
+    iconColor: "yellow",
     markerColor: "green",
     shape: "circle"
   })
@@ -89,9 +98,12 @@ var icons = {
 d3.json("https://data.cityofnewyork.us/resource/uip8-fykc.json", function(data) {
     for (var i = 0; i < data.length; i++) {
         var element = data[i];
-        console.log(element.latitude)
+        // console.log(element.latitude)
 
         var offensecode;
+        // if(element.ofns_desc == all of them){
+        //   offensecode = "ALL CRIME"
+        // }
         if(element.ofns_desc == "RAPE"){
             offensecode = "RAPE"
         }
@@ -102,7 +114,7 @@ d3.json("https://data.cityofnewyork.us/resource/uip8-fykc.json", function(data) 
             offensecode = "ROBBERY"
         }
         else {
-            offensecode = "NORMAL"
+            offensecode = "OTHER"
         }
 
         var newMarker = L.marker([element.latitude, element.longitude], {
