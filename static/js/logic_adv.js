@@ -98,12 +98,12 @@ var icons = {
 d3.json("https://data.cityofnewyork.us/resource/uip8-fykc.json", function(data) {
     for (var i = 0; i < data.length; i++) {
         var element = data[i];
-        console.log(element.latitude)
+        // console.log(element.latitude)
 
         var offensecode;
-        // if(element.ofns_desc == i){
+        // if(element.ofns_desc == all of them){
         //   offensecode = "ALL CRIME"
-        }
+        // }
         if(element.ofns_desc == "RAPE"){
             offensecode = "RAPE"
         }
