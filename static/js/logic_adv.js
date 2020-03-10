@@ -25,7 +25,7 @@ var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v9/til
     "Dark Map": darkmap
   };
 var layers = {
-  ALL_CRIME: new L.LayerGroup(),
+  
   RAPE: new L.LayerGroup(),
   MURDER: new L.LayerGroup(),
   ROBBERY: new L.LayerGroup(),
@@ -37,7 +37,7 @@ var map = L.map("map-id", {
   center: [40.73, -74.0059],
   zoom: 12,
   layers: [
-    layers.ALL_CRIME,
+   
     layers.RAPE,
     layers.MURDER,
     layers.ROBBERY,
@@ -50,7 +50,7 @@ lightmap.addTo(map);
 
 
 var overlays = {
-  "All Crimes": layers.ALL_CRIME,
+  
   "Rape": layers.RAPE,
   "Murder": layers.MURDER,
   "Robbery": layers.ROBBERY,
@@ -62,16 +62,11 @@ L.control.layers(baseMaps, overlays).addTo(map);
 
 
 var icons = {
-  ALL_CRIME: L.ExtraMarkers.icon({
-    icon: "ion-minus-circled",
-    iconColor: "grey",
-    markerColor: "yellow",
-    shape: "circle"
-  }),
+  
   RAPE: L.ExtraMarkers.icon({
     icon: "ion-minus-circled",
     iconColor: "red",
-    markerColor: "red",
+    markerColor: "blue-dark",
     shape: "circle"
   }),
   MURDER: L.ExtraMarkers.icon({
@@ -101,9 +96,7 @@ d3.json("https://data.cityofnewyork.us/resource/uip8-fykc.json", function(data) 
         // console.log(element.latitude)
 
         var offensecode;
-        // if(element.ofns_desc == all of them){
-        //   offensecode = "ALL CRIME"
-        // }
+        
         if(element.ofns_desc == "RAPE"){
             offensecode = "RAPE"
         }
