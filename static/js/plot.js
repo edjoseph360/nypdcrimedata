@@ -73,7 +73,7 @@ function init () {
           }];
           var layout = {
             height: 400,
-            width: 500
+            width: 400
           };
           Plotly.newPlot('pie', data_age, layout);
         
