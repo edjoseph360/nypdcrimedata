@@ -57,11 +57,9 @@ function init () {
 
           if  (sample.age_group == '45-64')
           age_group_45_64.push('Age 45-64')
+
           if  (sample.age_group == '65+')
           age_group_65_plus.push('65 and Over')
-
-       
-      
 
       })    
   var data_age = [{
@@ -97,9 +95,9 @@ function init () {
           if  (sample.arrest_boro == 'S')
           staten_island.push('Staten Island')
 
-
           if  (sample.arrest_boro == 'B')
           bronx.push('Bronx')
+
       }) 
 
       var data_boro = [
