@@ -1,5 +1,3 @@
-
-
 function buildChart (sample) {   
         d3.json('https://data.cityofnewyork.us/resource/uip8-fykc.json').then((data)=> {
             console.log(data)   
