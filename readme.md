@@ -11,12 +11,12 @@ We used Plotly to create three graphs:
 * Pie Chert: Crime Rate per Age Group
 * Bar Chart: Crime Rate per Neighborhood
 
-<img width="700" height="300" src="static/img/Fig1.png">
+<img width="900" height="350" src="static/img/Fig1.png">
 
 
 Using Leaflet we created a base map of NYC with three layers. Markers were added for some specific crimes: RAPE, MURDER, ROBBERY and categorised the rest as "OTHER" to display the crime distribution in the city. For each category there is an overlay created to filter through the different crimes.
 
-<img width="700" height="300" src="static/img/Fig2.png">
+<img width="900" height="350" src="static/img/Fig2.png">
 
 The retrived data was stored in MongoDB.
 
